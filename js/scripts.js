@@ -3,8 +3,45 @@ function add(number1, number2)  {
   return number1 + number2;
 }
 
-//user interface logic
-const number1 = parseInt(prompt("Enter a temperature in Celsius:"));
-// const number2 = prompt("Enter another number:");
+function subtract(number1, number2) {
+  return number1 - number2;
+}
 
-window.alert("The temperature in Fahrenheit is " + ((number1 * 1.8 + 32) + "F."));
+function multiply(number1, number2) {
+  return number1 * number2;
+}
+
+function divide(number1, number2) {
+  return number1 / number2;
+}
+
+function CtoF(number1)  {
+  return number1 * 1.8 + 32
+}
+
+// user interface logic
+
+function handleCalculation(event) {
+  event.preventDefault();
+  const number1 = parseInt(document.querySelector("input#input1").value);
+  const number2 = parseInt(document.querySelector("input#input2").value);
+  const operator = document.querySelector("input[name='operator']:checked").value;
+  
+  let result;
+  if (operator === "add") {
+    result = add(number1, number2);
+  } else if (operator === "subtract") {
+    result = subtract(number1, number2);
+  } else if (operator === "multiply") {
+    result = multiply(number1, number2);
+  } else if (operator === "divide") {
+    result = divide(number1, number2);
+  }
+
+  document.getElementById("output").innerText = result;
+}
+
+window.addEventListener("load", function()  {
+  const form = this.document.getElementById("calculator");
+  form.addEventListener("submit", handleCalculation);
+});
